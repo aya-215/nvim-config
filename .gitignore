@@ -1,0 +1,16 @@
+# Temporary files
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+
+# If plugins were accidentally installed in config dir
+lazy.nvim/
+*/lazy.nvim/
+.lazy/
+plugged/
+plugin/packer_compiled.lua
