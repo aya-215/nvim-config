@@ -8,6 +8,9 @@ foo.*
 *.log
 data
 
+# Claude Code personal settings
+.claude/
+
 # If plugins were accidentally installed in config dir
 lazy.nvim/
 */lazy.nvim/
