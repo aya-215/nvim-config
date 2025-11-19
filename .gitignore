@@ -17,3 +17,6 @@ lazy.nvim/
 .lazy/
 plugged/
 plugin/packer_compiled.lua
+
+# Startup time measurement history
+startup-history.json
