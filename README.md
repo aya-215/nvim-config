@@ -61,7 +61,8 @@ nvim/
 │   └── plugins/           # プラグイン設定（40以上のファイル）
 ├── tools/                 # ユーティリティスクリプト
 │   ├── measure-startup.ps1   # 起動速度計測
-│   └── show-history.ps1      # 履歴表示
+│   ├── show-history.ps1      # 履歴表示
+│   └── check-threshold.ps1   # 閾値アラート
 └── .gitignore
 ```
 
@@ -84,11 +85,13 @@ nvim/
 
 このリポジトリには、Neovimの起動速度を自動計測・履歴管理する仕組みが組み込まれています。
 
-### 自動計測
+### 自動計測と閾値アラート
 
-コミット時に自動的に起動速度が計測されます（Git post-commit hookで実行）。
+コミット時に自動的に起動速度が計測され、閾値（100ms）を超えた場合は警告が表示されます。
 
-計測結果は `startup-history.json` に保存されます（このファイルは `.gitignore` に含まれています）。
+- Git post-commit hookで自動実行
+- 計測結果は `startup-history.json` に保存（`.gitignore` 済み）
+- 閾値超過時は調査のヒントを表示
 
 ### 手動計測
 
@@ -110,6 +113,18 @@ pwsh tools/show-history.ps1
 
 # 最新10件をグラフ付きで表示
 pwsh tools/show-history.ps1 -Last 10 -Graph
+```
+
+### 閾値チェック
+
+手動で閾値チェックを実行することもできます：
+
+```powershell
+# デフォルト閾値（100ms）でチェック
+pwsh tools/check-threshold.ps1
+
+# カスタム閾値でチェック
+pwsh tools/check-threshold.ps1 -Threshold 80
 ```
 
 **出力例:**
