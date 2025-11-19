@@ -27,7 +27,7 @@ return {
           },
         },
         inlay_hints = {
-          enabled = true,
+          enabled = false,
           exclude = {},
         },
         codelens = {
@@ -58,9 +58,12 @@ return {
                 },
                 workspace = {
                   checkThirdParty = false,
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  maxPreload = 2000,
-                  preloadFileSize = 50000,
+                  library = {
+                    vim.env.VIMRUNTIME,
+                    "${3rd}/luv/library",
+                  },
+                  maxPreload = 1000,
+                  preloadFileSize = 10000,
                 },
                 diagnostics = {
                   globals = {'vim'},

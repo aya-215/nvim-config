@@ -34,7 +34,7 @@ return {
         },
       },
       log_level = vim.log.levels.INFO,
-      max_concurrent_installers = 4,
+      max_concurrent_installers = 2, -- メモリ最適化: 4→2に削減
       registries = {
         "github:mason-org/mason-registry",
       },
@@ -91,12 +91,12 @@ return {
         "ts_ls",
         "eslint",
         "pyright",
-        "rust_analyzer",
+        -- "rust_analyzer", -- メモリ最適化: Rust未使用のため削除
         "bashls",
-        "dockerls",
-        "docker_compose_language_service",
+        -- "dockerls", -- メモリ最適化: Docker編集頻度低いため削除
+        -- "docker_compose_language_service", -- メモリ最適化: Docker編集頻度低いため削除
         "marksman",
-        "jdtls",
+        "jdtls", -- Java使用中のため保持
       },
       automatic_installation = false,
     },
