@@ -3,7 +3,7 @@
 # 使い方: pwsh tools/measure-startup.ps1
 
 param(
-    [int]$Iterations = 10,  # 計測回数
+    [int]$Iterations = 100,  # 計測回数（デフォルト100回）
     [string]$OutputFile = "$PSScriptRoot\..\startup-history.json"
 )
 
