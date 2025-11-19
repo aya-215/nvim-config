@@ -9,3 +9,6 @@ vim.opt.secure = true
 
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
+
+-- LSP定期再起動でメモリリーク防止
+require("config.lsp-restart")
