@@ -7,6 +7,10 @@ param(
     [string]$OutputFile = "$PSScriptRoot\..\startup-history.json"
 )
 
+# エンコーディング設定（日本語文字化け対策）
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 $ErrorActionPreference = "Stop"
 
 # vim-startuptimeがインストールされているか確認
@@ -49,9 +53,9 @@ Write-Host "  中央値: ${median}ms (近似)"
 Write-Host "  最小: ${min}ms"
 Write-Host "  最大: ${max}ms"
 
-# Git情報取得
+# Git情報取得（UTF-8エンコーディングで取得）
 $gitHash = git rev-parse --short HEAD 2>$null
-$gitMessage = git log -1 --pretty=%s 2>$null
+$gitMessage = git -c core.quotepath=false log -1 --pretty=format:%s 2>$null
 $gitDate = git log -1 --pretty=%ci 2>$null
 
 # 結果をJSON形式で保存
@@ -70,7 +74,7 @@ $result = @{
 # 既存履歴に追記
 $history = @()
 if (Test-Path $OutputFile) {
-    $existing = Get-Content $OutputFile -Raw | ConvertFrom-Json
+    $existing = Get-Content $OutputFile -Raw -Encoding UTF8 | ConvertFrom-Json
     # 単一オブジェクトの場合は配列に変換
     if ($existing -is [Array]) {
         $history = @($existing)

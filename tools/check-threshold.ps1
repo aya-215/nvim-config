@@ -7,6 +7,10 @@ param(
     [string]$HistoryFile = "$PSScriptRoot\..\startup-history.json"
 )
 
+# エンコーディング設定（日本語文字化け対策）
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 $ErrorActionPreference = "Stop"
 
 if (-not (Test-Path $HistoryFile)) {
@@ -15,7 +19,7 @@ if (-not (Test-Path $HistoryFile)) {
 }
 
 # 履歴を読み込み
-$history = Get-Content $HistoryFile -Raw | ConvertFrom-Json
+$history = Get-Content $HistoryFile -Raw -Encoding UTF8 | ConvertFrom-Json
 if ($history -is [Array]) {
     $allHistory = @($history)
 } else {

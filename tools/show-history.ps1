@@ -6,6 +6,10 @@ param(
     [switch]$Graph    # グラフ表示
 )
 
+# エンコーディング設定（日本語文字化け対策）
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 $historyFile = "$PSScriptRoot\..\startup-history.json"
 
 if (-not (Test-Path $historyFile)) {
@@ -13,7 +17,7 @@ if (-not (Test-Path $historyFile)) {
     exit 1
 }
 
-$history = Get-Content $historyFile -Raw | ConvertFrom-Json
+$history = Get-Content $historyFile -Raw -Encoding UTF8 | ConvertFrom-Json
 
 if ($history.Count -eq 0) {
     Write-Host "履歴が空です" -ForegroundColor Yellow
